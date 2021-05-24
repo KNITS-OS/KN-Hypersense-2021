@@ -1,0 +1,28 @@
+{
+  "name": "Metric",
+  "fields": [
+    {
+      "fieldName": "thingUuid",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "metricData",
+      "otherEntityRelationshipName": "metric",
+      "relationshipName": "metricData"
+    }
+  ],
+  "javadoc": "Entity that holds up defined metrics.\\n@author Vassili Moskaljov.\\n@version 1.0",
+  "entityTableName": "metric",
+  "dto": "mapstruct",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210524174415"
+}

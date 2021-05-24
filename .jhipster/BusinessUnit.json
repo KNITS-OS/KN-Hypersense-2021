@@ -1,0 +1,38 @@
+{
+  "name": "BusinessUnit",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "companyUser",
+      "otherEntityRelationshipName": "businessUnit",
+      "relationshipName": "users"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "factory",
+      "otherEntityRelationshipName": "businessUnit",
+      "relationshipName": "factory"
+    }
+  ],
+  "javadoc": "Representation of the specific group of users defined by organization.\\n@author Vassili Moskaljov.\\n@version 1.0",
+  "entityTableName": "business_unit",
+  "dto": "mapstruct",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210524174412"
+}

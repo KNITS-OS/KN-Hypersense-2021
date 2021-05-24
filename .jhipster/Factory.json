@@ -1,0 +1,46 @@
+{
+  "name": "Factory",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "location",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "productionLineGroup",
+      "otherEntityRelationshipName": "factory",
+      "relationshipName": "productionLineGroup"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "businessUnit",
+      "otherEntityRelationshipName": "factory",
+      "relationshipName": "businessUnit"
+    }
+  ],
+  "javadoc": "Factory entity that represents current factory.\\n@author Vassili Moskaljov\\n@version 1.0",
+  "entityTableName": "factory",
+  "dto": "mapstruct",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210524174411"
+}

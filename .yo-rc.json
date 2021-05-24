@@ -41,6 +41,20 @@
     "clientTheme": "none",
     "clientThemeVariant": "",
     "withAdminUi": true,
-    "languages": ["en", "fr"]
+    "languages": ["en", "fr"],
+    "entities": [
+      "Factory",
+      "BusinessUnit",
+      "ProductionLine",
+      "ProductionLineGroup",
+      "Metric",
+      "MetricData",
+      "CompanyUser",
+      "LocationData",
+      "Things",
+      "State",
+      "ProductData"
+    ],
+    "lastLiquibaseTimestamp": 1621878261000
   }
 }

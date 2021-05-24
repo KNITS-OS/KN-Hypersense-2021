@@ -1,0 +1,51 @@
+{
+  "name": "ProductionLine",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "locationData",
+      "otherEntityRelationshipName": "productionLine",
+      "relationshipName": "locationData",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "things",
+      "otherEntityRelationshipName": "productionLine",
+      "relationshipName": "things"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "state",
+      "otherEntityRelationshipName": "productionLine",
+      "relationshipName": "states"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "productionLineGroup",
+      "otherEntityRelationshipName": "productionLine",
+      "relationshipName": "productionLineGroup"
+    }
+  ],
+  "javadoc": "Enity of specific production line.\\n@author Vassili Moskaljov.\\n@version 1.0",
+  "entityTableName": "production_line",
+  "dto": "mapstruct",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210524174413"
+}

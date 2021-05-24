@@ -1,0 +1,23 @@
+{
+  "name": "State",
+  "fields": [],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "productionLine",
+      "otherEntityRelationshipName": "states",
+      "relationshipName": "productionLine"
+    }
+  ],
+  "javadoc": "Entity that holds current states of the Production line.\\n@author Vassili Moskaljov.\\n@version 1.0",
+  "entityTableName": "state",
+  "dto": "mapstruct",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210524174420"
+}

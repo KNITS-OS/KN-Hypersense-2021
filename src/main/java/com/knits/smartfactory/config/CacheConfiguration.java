@@ -48,6 +48,24 @@ public class CacheConfiguration {
             createCache(cm, com.knits.smartfactory.domain.User.class.getName());
             createCache(cm, com.knits.smartfactory.domain.Authority.class.getName());
             createCache(cm, com.knits.smartfactory.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.knits.smartfactory.domain.Factory.class.getName());
+            createCache(cm, com.knits.smartfactory.domain.Factory.class.getName() + ".productionLineGroups");
+            createCache(cm, com.knits.smartfactory.domain.Factory.class.getName() + ".businessUnits");
+            createCache(cm, com.knits.smartfactory.domain.BusinessUnit.class.getName());
+            createCache(cm, com.knits.smartfactory.domain.BusinessUnit.class.getName() + ".users");
+            createCache(cm, com.knits.smartfactory.domain.ProductionLine.class.getName());
+            createCache(cm, com.knits.smartfactory.domain.ProductionLine.class.getName() + ".things");
+            createCache(cm, com.knits.smartfactory.domain.ProductionLine.class.getName() + ".states");
+            createCache(cm, com.knits.smartfactory.domain.ProductionLineGroup.class.getName());
+            createCache(cm, com.knits.smartfactory.domain.ProductionLineGroup.class.getName() + ".productionLines");
+            createCache(cm, com.knits.smartfactory.domain.Metric.class.getName());
+            createCache(cm, com.knits.smartfactory.domain.Metric.class.getName() + ".metricData");
+            createCache(cm, com.knits.smartfactory.domain.MetricData.class.getName());
+            createCache(cm, com.knits.smartfactory.domain.CompanyUser.class.getName());
+            createCache(cm, com.knits.smartfactory.domain.LocationData.class.getName());
+            createCache(cm, com.knits.smartfactory.domain.Things.class.getName());
+            createCache(cm, com.knits.smartfactory.domain.State.class.getName());
+            createCache(cm, com.knits.smartfactory.domain.ProductData.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }
