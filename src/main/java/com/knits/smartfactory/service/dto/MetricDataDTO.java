@@ -2,6 +2,7 @@ package com.knits.smartfactory.service.dto;
 
 import io.swagger.annotations.ApiModel;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Objects;
 
 /**
@@ -12,6 +13,14 @@ public class MetricDataDTO implements Serializable {
 
     private Long id;
 
+    private LocalDate timeStamp;
+
+    private String measureValue;
+
+    private String name;
+
+    private String status;
+
     private MetricDTO metric;
 
     public Long getId() {
@@ -20,6 +29,38 @@ public class MetricDataDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public LocalDate getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(LocalDate timeStamp) {
+        this.timeStamp = timeStamp;
+    }
+
+    public String getMeasureValue() {
+        return measureValue;
+    }
+
+    public void setMeasureValue(String measureValue) {
+        this.measureValue = measureValue;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public MetricDTO getMetric() {
@@ -56,6 +97,10 @@ public class MetricDataDTO implements Serializable {
     public String toString() {
         return "MetricDataDTO{" +
             "id=" + getId() +
+            ", timeStamp='" + getTimeStamp() + "'" +
+            ", measureValue='" + getMeasureValue() + "'" +
+            ", name='" + getName() + "'" +
+            ", status='" + getStatus() + "'" +
             ", metric=" + getMetric() +
             "}";
     }
