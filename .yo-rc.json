@@ -53,8 +53,9 @@
       "LocationData",
       "Things",
       "State",
-      "ProductData"
+      "ProductData",
+      "ProductPlan"
     ],
-    "lastLiquibaseTimestamp": 1621878261000
+    "lastLiquibaseTimestamp": 1622479704000
   }
 }

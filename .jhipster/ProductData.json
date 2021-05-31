@@ -1,7 +1,31 @@
 {
   "name": "ProductData",
-  "fields": [],
-  "relationships": [],
+  "fields": [
+    {
+      "fieldName": "completedQty",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "scrapedQty",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "pendingQty",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "rejectedQty",
+      "fieldType": "Long"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "productPlan",
+      "otherEntityRelationshipName": "productData",
+      "relationshipName": "productPlan"
+    }
+  ],
   "javadoc": "Entity of the product that being produced.\\n@author Vassili Moskaljov.\\n@version 1.0",
   "entityTableName": "product_data",
   "dto": "mapstruct",

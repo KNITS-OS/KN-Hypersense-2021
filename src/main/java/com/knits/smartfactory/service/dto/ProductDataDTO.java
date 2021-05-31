@@ -12,12 +12,62 @@ public class ProductDataDTO implements Serializable {
 
     private Long id;
 
+    private Long completedQty;
+
+    private Long scrapedQty;
+
+    private Long pendingQty;
+
+    private Long rejectedQty;
+
+    private ProductPlanDTO productPlan;
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getCompletedQty() {
+        return completedQty;
+    }
+
+    public void setCompletedQty(Long completedQty) {
+        this.completedQty = completedQty;
+    }
+
+    public Long getScrapedQty() {
+        return scrapedQty;
+    }
+
+    public void setScrapedQty(Long scrapedQty) {
+        this.scrapedQty = scrapedQty;
+    }
+
+    public Long getPendingQty() {
+        return pendingQty;
+    }
+
+    public void setPendingQty(Long pendingQty) {
+        this.pendingQty = pendingQty;
+    }
+
+    public Long getRejectedQty() {
+        return rejectedQty;
+    }
+
+    public void setRejectedQty(Long rejectedQty) {
+        this.rejectedQty = rejectedQty;
+    }
+
+    public ProductPlanDTO getProductPlan() {
+        return productPlan;
+    }
+
+    public void setProductPlan(ProductPlanDTO productPlan) {
+        this.productPlan = productPlan;
     }
 
     @Override
@@ -46,6 +96,11 @@ public class ProductDataDTO implements Serializable {
     public String toString() {
         return "ProductDataDTO{" +
             "id=" + getId() +
+            ", completedQty=" + getCompletedQty() +
+            ", scrapedQty=" + getScrapedQty() +
+            ", pendingQty=" + getPendingQty() +
+            ", rejectedQty=" + getRejectedQty() +
+            ", productPlan=" + getProductPlan() +
             "}";
     }
 }

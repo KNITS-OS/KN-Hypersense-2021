@@ -66,6 +66,8 @@ public class CacheConfiguration {
             createCache(cm, com.knits.smartfactory.domain.Things.class.getName());
             createCache(cm, com.knits.smartfactory.domain.State.class.getName());
             createCache(cm, com.knits.smartfactory.domain.ProductData.class.getName());
+            createCache(cm, com.knits.smartfactory.domain.ProductPlan.class.getName());
+            createCache(cm, com.knits.smartfactory.domain.ProductPlan.class.getName() + ".productData");
             // jhipster-needle-ehcache-add-entry
         };
     }
