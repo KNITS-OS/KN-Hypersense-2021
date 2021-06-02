@@ -1,0 +1,31 @@
+{
+  "name": "ProductPlan",
+  "fields": [
+    {
+      "fieldName": "estimatedTime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "qty",
+      "fieldType": "Long"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "productData",
+      "otherEntityRelationshipName": "productPlan",
+      "relationshipName": "productData"
+    }
+  ],
+  "entityTableName": "product_plan",
+  "dto": "mapstruct",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210531164824"
+}

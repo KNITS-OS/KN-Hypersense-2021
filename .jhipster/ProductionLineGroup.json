@@ -1,0 +1,38 @@
+{
+  "name": "ProductionLineGroup",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "productionLine",
+      "otherEntityRelationshipName": "productionLineGroup",
+      "relationshipName": "productionLine"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "factory",
+      "otherEntityRelationshipName": "productionLineGroup",
+      "relationshipName": "factory"
+    }
+  ],
+  "javadoc": "Entity that groups up Production lines.\\n@author Vassili Moskaljov.\\n@version 1.0",
+  "entityTableName": "production_line_group",
+  "dto": "mapstruct",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210602183713"
+}

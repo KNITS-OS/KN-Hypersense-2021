@@ -1,0 +1,29 @@
+{
+  "name": "LocationData",
+  "fields": [
+    {
+      "fieldName": "floor",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "room",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "additionalInfo",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [],
+  "javadoc": "Entity that hold location specific to Production line.\\n@author Vassili Moskaljov.\\n@version 1.0",
+  "entityTableName": "location_data",
+  "dto": "mapstruct",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210602183718"
+}

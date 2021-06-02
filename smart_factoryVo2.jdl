@@ -1,0 +1,131 @@
+/**
+* Factory entity that represents current factory.
+* @author Vassili Moskaljov
+* @version 1.0
+*/
+entity Factory {
+	name String
+    description String
+    location String
+    type String
+}
+
+/**
+* Representation of the specific group of users defined by organization.
+* @author Vassili Moskaljov.
+* @version 1.0
+*/
+entity BusinessUnit {
+	name String
+    description String
+}
+
+/**
+* Enity of specific production line.
+* @author Vassili Moskaljov.
+* @version 1.0
+*/
+entity ProductionLine {
+	name String
+    description String
+}
+
+/**
+* Entity that groups up Production lines.
+* @author Vassili Moskaljov.
+* @version 1.0
+*/
+entity ProductionLineGroup {
+	name String
+    description String
+}
+
+/**
+* Entity that holds up defined metrics.
+* @author Vassili Moskaljov.
+* @version 1.0
+*/
+entity Metric {
+	thingUuid String
+}
+
+/**
+* Set of specific metrics that measure activities.
+* @author Vassili Moskaljov.
+* @version 1.0
+*/
+entity MetricData
+
+/**
+* Entity that holds collection of related users.
+* @author Vassili Moskaljov
+* @version 1.0
+*/
+entity CompanyUser {
+	usersUuid String
+}
+
+/**
+* Entity that hold location specific to Production line.
+* @author Vassili Moskaljov.
+* @version 1.0
+*/
+entity LocationData
+
+/**
+* Entity that hold collection of related Things from Core platform.
+* @author Vassili Moskaljov.
+* @version 1.0
+*/
+entity Things {
+	thingUuid String
+}
+
+/**
+* Entity that holds current states of the Production line.
+* @author Vassili Moskaljov.
+* @version 1.0
+*/
+entity State
+
+/**
+* Entity of the product that being produced.
+* @author Vassili Moskaljov.
+* @version 1.0
+*/
+entity ProductData {
+	completedQty Long
+    scrapedQty Long
+    pendingQty Long
+    rejectedQty Long
+}
+
+entity ProductPlan {
+	estimatedTime LocalDate
+    qty Long
+}
+
+relationship OneToMany {
+	Factory{productionLineGroup} to ProductionLineGroup
+    ProductionLineGroup{productionLine} to ProductionLine
+    Factory{businessUnit} to BusinessUnit
+    BusinessUnit{users} to CompanyUser
+    Metric{metricData} to MetricData
+    ProductionLine{things} to Things
+    ProductionLine{states} to State
+    ProductPlan{productData} to ProductData
+}
+
+relationship OneToOne {
+	ProductionLine{locationData} to LocationData
+}
+// Set pagination options
+
+// Use Data Transfer Objects (DTO)
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+
+// Set an angular suffix
+// angularSuffix * with mySuffix

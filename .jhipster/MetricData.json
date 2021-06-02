@@ -1,0 +1,43 @@
+{
+  "name": "MetricData",
+  "fields": [
+    {
+      "fieldName": "timeStamp",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "measureValue",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "status",
+      "otherEntityRelationshipName": "metricData",
+      "relationshipName": "status",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "metric",
+      "otherEntityRelationshipName": "metrics",
+      "relationshipName": "metric"
+    }
+  ],
+  "javadoc": "Set of specific metrics that measure activities.\\n@author Vassili Moskaljov.\\n@version 1.0",
+  "entityTableName": "metric_data",
+  "dto": "mapstruct",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210602183715"
+}

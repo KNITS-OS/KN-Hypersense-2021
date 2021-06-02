@@ -41,6 +41,23 @@
     "packageFolder": "com/knits/smartfactory",
     "jwtSecretKey": "Njc2YTQ2OTkzYzg5OTFhMDU3NzE0M2NlZjBjNjZjYmM1OWMxZmQ1NmQ0NDk4ODk2ZjdmYjEwNjNmNDc1MWVmMjk5OWRhZjA2YmMwMjI0ZDllY2VlMzNhZTU4NGUzNmIyNzRkZDgxM2ZjYzU5MWI1YzMyOGJhZTA0OWY1ODcyNzM=",
     "clientPackageManager": "npm",
-    "languages": ["en", "fr"]
+    "languages": ["en", "fr"],
+    "entities": [
+      "Factory",
+      "BusinessUnit",
+      "ProductionLine",
+      "ProductionLineGroup",
+      "Metric",
+      "MetricData",
+      "CompanyUser",
+      "UserProfile",
+      "LocationData",
+      "Things",
+      "State",
+      "Status",
+      "ProductData",
+      "ProductionPlan"
+    ],
+    "lastLiquibaseTimestamp": 1622659043000
   }
 }

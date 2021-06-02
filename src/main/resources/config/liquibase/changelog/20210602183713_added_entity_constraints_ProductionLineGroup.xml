@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity ProductionLineGroup.
+    -->
+    <changeSet id="20210602183713-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="factory_id"
+                                 baseTableName="production_line_group"
+                                 constraintName="fk_production_line_group__factory_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="factory"/>
+    </changeSet>
+</databaseChangeLog>

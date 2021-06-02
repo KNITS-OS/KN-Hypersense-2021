@@ -1,0 +1,35 @@
+{
+  "name": "CompanyUser",
+  "fields": [
+    {
+      "fieldName": "usersUuid",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "userProfile",
+      "otherEntityRelationshipName": "companyUser",
+      "relationshipName": "userProfile",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "businessUnit",
+      "otherEntityRelationshipName": "users",
+      "relationshipName": "businessUnit"
+    }
+  ],
+  "javadoc": "Entity that holds collection of related users.\\n@author Vassili Moskaljov\\n@version 1.0",
+  "entityTableName": "company_user",
+  "dto": "mapstruct",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210602183716"
+}
