@@ -7,8 +7,9 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity {@link MetricData} and its DTO {@link MetricDataDTO}.
  */
-@Mapper(componentModel = "spring", uses = { MetricMapper.class })
+@Mapper(componentModel = "spring", uses = { StatusMapper.class, MetricMapper.class })
 public interface MetricDataMapper extends EntityMapper<MetricDataDTO, MetricData> {
+    @Mapping(target = "status", source = "status", qualifiedByName = "id")
     @Mapping(target = "metric", source = "metric", qualifiedByName = "id")
     MetricDataDTO toDto(MetricData s);
 }

@@ -1,6 +1,15 @@
 {
   "name": "State",
-  "fields": [],
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    }
+  ],
   "relationships": [
     {
       "relationshipType": "many-to-one",
@@ -19,5 +28,5 @@
   "readOnly": false,
   "embedded": false,
   "applications": "*",
-  "changelogDate": "20210524174420"
+  "changelogDate": "20210602183720"
 }

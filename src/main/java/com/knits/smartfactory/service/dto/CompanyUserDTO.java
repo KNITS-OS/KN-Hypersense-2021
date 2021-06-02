@@ -14,6 +14,8 @@ public class CompanyUserDTO implements Serializable {
 
     private String usersUuid;
 
+    private UserProfileDTO userProfile;
+
     private BusinessUnitDTO businessUnit;
 
     public Long getId() {
@@ -30,6 +32,14 @@ public class CompanyUserDTO implements Serializable {
 
     public void setUsersUuid(String usersUuid) {
         this.usersUuid = usersUuid;
+    }
+
+    public UserProfileDTO getUserProfile() {
+        return userProfile;
+    }
+
+    public void setUserProfile(UserProfileDTO userProfile) {
+        this.userProfile = userProfile;
     }
 
     public BusinessUnitDTO getBusinessUnit() {
@@ -67,6 +77,7 @@ public class CompanyUserDTO implements Serializable {
         return "CompanyUserDTO{" +
             "id=" + getId() +
             ", usersUuid='" + getUsersUuid() + "'" +
+            ", userProfile=" + getUserProfile() +
             ", businessUnit=" + getBusinessUnit() +
             "}";
     }

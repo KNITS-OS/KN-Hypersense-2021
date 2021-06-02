@@ -7,8 +7,8 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity {@link ProductData} and its DTO {@link ProductDataDTO}.
  */
-@Mapper(componentModel = "spring", uses = { ProductPlanMapper.class })
+@Mapper(componentModel = "spring", uses = { ProductionPlanMapper.class })
 public interface ProductDataMapper extends EntityMapper<ProductDataDTO, ProductData> {
-    @Mapping(target = "productPlan", source = "productPlan", qualifiedByName = "id")
+    @Mapping(target = "productionPlan", source = "productionPlan", qualifiedByName = "id")
     ProductDataDTO toDto(ProductData s);
 }

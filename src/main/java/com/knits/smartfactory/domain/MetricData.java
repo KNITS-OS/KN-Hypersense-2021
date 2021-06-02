@@ -2,7 +2,7 @@ package com.knits.smartfactory.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.Instant;
 import javax.persistence.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -23,7 +23,7 @@ public class MetricData implements Serializable {
     private Long id;
 
     @Column(name = "time_stamp")
-    private LocalDate timeStamp;
+    private Instant timeStamp;
 
     @Column(name = "measure_value")
     private String measureValue;
@@ -31,11 +31,12 @@ public class MetricData implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "status")
-    private String status;
+    @OneToOne
+    @JoinColumn(unique = true)
+    private Status status;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "metricData" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "metrics" }, allowSetters = true)
     private Metric metric;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -52,16 +53,16 @@ public class MetricData implements Serializable {
         return this;
     }
 
-    public LocalDate getTimeStamp() {
+    public Instant getTimeStamp() {
         return this.timeStamp;
     }
 
-    public MetricData timeStamp(LocalDate timeStamp) {
+    public MetricData timeStamp(Instant timeStamp) {
         this.timeStamp = timeStamp;
         return this;
     }
 
-    public void setTimeStamp(LocalDate timeStamp) {
+    public void setTimeStamp(Instant timeStamp) {
         this.timeStamp = timeStamp;
     }
 
@@ -91,16 +92,16 @@ public class MetricData implements Serializable {
         this.name = name;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return this.status;
     }
 
-    public MetricData status(String status) {
-        this.status = status;
+    public MetricData status(Status status) {
+        this.setStatus(status);
         return this;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
@@ -144,7 +145,6 @@ public class MetricData implements Serializable {
             ", timeStamp='" + getTimeStamp() + "'" +
             ", measureValue='" + getMeasureValue() + "'" +
             ", name='" + getName() + "'" +
-            ", status='" + getStatus() + "'" +
             "}";
     }
 }

@@ -12,6 +12,10 @@ public class StateDTO implements Serializable {
 
     private Long id;
 
+    private String name;
+
+    private String description;
+
     private ProductionLineDTO productionLine;
 
     public Long getId() {
@@ -20,6 +24,22 @@ public class StateDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public ProductionLineDTO getProductionLine() {
@@ -56,6 +76,8 @@ public class StateDTO implements Serializable {
     public String toString() {
         return "StateDTO{" +
             "id=" + getId() +
+            ", name='" + getName() + "'" +
+            ", description='" + getDescription() + "'" +
             ", productionLine=" + getProductionLine() +
             "}";
     }

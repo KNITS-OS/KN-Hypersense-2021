@@ -7,8 +7,8 @@ services:
       - _JAVA_OPTIONS=-Xmx512m -Xms256m
       - SPRING_PROFILES_ACTIVE=prod,api-docs
       - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://smartfactory-postgresql:5432/SmartFactory
-      - SPRING_LIQUIBASE_URL=jdbc:postgresql://smartfactory-postgresql:5432/SmartFactory
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://smartfactory-postgresql:5432/smartfactory
+      - SPRING_LIQUIBASE_URL=jdbc:postgresql://smartfactory-postgresql:5432/smartfactory
       - JHIPSTER_SLEEP=30 # gives time for other services to boot before the application
     # If you want to expose these ports outside your dev PC,
     # remove the "127.0.0.1:" prefix
@@ -17,9 +17,9 @@ services:
   smartfactory-postgresql:
     image: postgres:13.2
     # volumes:
-    #   - ~/volumes/jhipster/SmartFactory/postgresql/:/var/lib/postgresql/data/
+    #   - ~/volumes/jhipster/smartfactory/postgresql/:/var/lib/postgresql/data/
     environment:
-      - POSTGRES_USER=SmartFactory
+      - POSTGRES_USER=smartfactory
       - POSTGRES_PASSWORD=
       - POSTGRES_HOST_AUTH_METHOD=trust
     # If you want to expose these ports outside your dev PC,

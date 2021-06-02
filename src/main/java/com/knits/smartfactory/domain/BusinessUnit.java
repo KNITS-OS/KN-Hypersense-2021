@@ -31,7 +31,7 @@ public class BusinessUnit implements Serializable {
 
     @OneToMany(mappedBy = "businessUnit")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "businessUnit" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "userProfile", "businessUnit" }, allowSetters = true)
     private Set<CompanyUser> users = new HashSet<>();
 
     @ManyToOne

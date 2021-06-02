@@ -8,6 +8,13 @@
   ],
   "relationships": [
     {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "userProfile",
+      "otherEntityRelationshipName": "companyUser",
+      "relationshipName": "userProfile",
+      "ownerSide": true
+    },
+    {
       "relationshipType": "many-to-one",
       "otherEntityName": "businessUnit",
       "otherEntityRelationshipName": "users",
@@ -24,5 +31,5 @@
   "readOnly": false,
   "embedded": false,
   "applications": "*",
-  "changelogDate": "20210524174417"
+  "changelogDate": "20210602183716"
 }

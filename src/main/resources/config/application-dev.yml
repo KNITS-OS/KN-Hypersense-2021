@@ -33,7 +33,7 @@ spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:h2:mem:smartfactory;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-    username: SmartFactory
+    username: smartfactory
     password:
     hikari:
       poolName: Hikari
@@ -84,7 +84,7 @@ jhipster:
     authentication:
       jwt:
         # This token must be encoded using Base64 and be at least 256 bits long (you can type `openssl rand -base64 64` on your command line to generate a 512 bits one)
-        base64-secret: YTIyODI1N2RlMTNlY2RiMjk1Y2JhMGRkZGMyMjA4NjgxNTVmNzBlOTYwYWJlMTU0NDk1ZmU1ZmNkYTc0NzdmYWUzMDEwMDBjNmY0MzRjNjc0NTI1NWYzZDM0NzEzMjVkOTYwNGE5ZWNjOTQwNzkxMjBkNGI5NmZjNWMyZmI3MzU=
+        base64-secret: Njc2YTQ2OTkzYzg5OTFhMDU3NzE0M2NlZjBjNjZjYmM1OWMxZmQ1NmQ0NDk4ODk2ZjdmYjEwNjNmNDc1MWVmMjk5OWRhZjA2YmMwMjI0ZDllY2VlMzNhZTU4NGUzNmIyNzRkZDgxM2ZjYzU5MWI1YzMyOGJhZTA0OWY1ODcyNzM=
         # Token is valid 24 hours
         token-validity-in-seconds: 86400
         token-validity-in-seconds-for-remember-me: 2592000

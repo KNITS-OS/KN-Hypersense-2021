@@ -10,8 +10,8 @@ import com.knits.smartfactory.domain.MetricData;
 import com.knits.smartfactory.repository.MetricDataRepository;
 import com.knits.smartfactory.service.dto.MetricDataDTO;
 import com.knits.smartfactory.service.mapper.MetricDataMapper;
-import java.time.LocalDate;
-import java.time.ZoneId;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
@@ -33,17 +33,14 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class MetricDataResourceIT {
 
-    private static final LocalDate DEFAULT_TIME_STAMP = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_TIME_STAMP = LocalDate.now(ZoneId.systemDefault());
+    private static final Instant DEFAULT_TIME_STAMP = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_TIME_STAMP = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final String DEFAULT_MEASURE_VALUE = "AAAAAAAAAA";
     private static final String UPDATED_MEASURE_VALUE = "BBBBBBBBBB";
 
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
-
-    private static final String DEFAULT_STATUS = "AAAAAAAAAA";
-    private static final String UPDATED_STATUS = "BBBBBBBBBB";
 
     private static final String ENTITY_API_URL = "/api/metric-data";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -72,11 +69,7 @@ class MetricDataResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static MetricData createEntity(EntityManager em) {
-        MetricData metricData = new MetricData()
-            .timeStamp(DEFAULT_TIME_STAMP)
-            .measureValue(DEFAULT_MEASURE_VALUE)
-            .name(DEFAULT_NAME)
-            .status(DEFAULT_STATUS);
+        MetricData metricData = new MetricData().timeStamp(DEFAULT_TIME_STAMP).measureValue(DEFAULT_MEASURE_VALUE).name(DEFAULT_NAME);
         return metricData;
     }
 
@@ -87,11 +80,7 @@ class MetricDataResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static MetricData createUpdatedEntity(EntityManager em) {
-        MetricData metricData = new MetricData()
-            .timeStamp(UPDATED_TIME_STAMP)
-            .measureValue(UPDATED_MEASURE_VALUE)
-            .name(UPDATED_NAME)
-            .status(UPDATED_STATUS);
+        MetricData metricData = new MetricData().timeStamp(UPDATED_TIME_STAMP).measureValue(UPDATED_MEASURE_VALUE).name(UPDATED_NAME);
         return metricData;
     }
 
@@ -117,7 +106,6 @@ class MetricDataResourceIT {
         assertThat(testMetricData.getTimeStamp()).isEqualTo(DEFAULT_TIME_STAMP);
         assertThat(testMetricData.getMeasureValue()).isEqualTo(DEFAULT_MEASURE_VALUE);
         assertThat(testMetricData.getName()).isEqualTo(DEFAULT_NAME);
-        assertThat(testMetricData.getStatus()).isEqualTo(DEFAULT_STATUS);
     }
 
     @Test
@@ -153,8 +141,7 @@ class MetricDataResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(metricData.getId().intValue())))
             .andExpect(jsonPath("$.[*].timeStamp").value(hasItem(DEFAULT_TIME_STAMP.toString())))
             .andExpect(jsonPath("$.[*].measureValue").value(hasItem(DEFAULT_MEASURE_VALUE)))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
-            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
     }
 
     @Test
@@ -171,8 +158,7 @@ class MetricDataResourceIT {
             .andExpect(jsonPath("$.id").value(metricData.getId().intValue()))
             .andExpect(jsonPath("$.timeStamp").value(DEFAULT_TIME_STAMP.toString()))
             .andExpect(jsonPath("$.measureValue").value(DEFAULT_MEASURE_VALUE))
-            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
-            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS));
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME));
     }
 
     @Test
@@ -194,7 +180,7 @@ class MetricDataResourceIT {
         MetricData updatedMetricData = metricDataRepository.findById(metricData.getId()).get();
         // Disconnect from session so that the updates on updatedMetricData are not directly saved in db
         em.detach(updatedMetricData);
-        updatedMetricData.timeStamp(UPDATED_TIME_STAMP).measureValue(UPDATED_MEASURE_VALUE).name(UPDATED_NAME).status(UPDATED_STATUS);
+        updatedMetricData.timeStamp(UPDATED_TIME_STAMP).measureValue(UPDATED_MEASURE_VALUE).name(UPDATED_NAME);
         MetricDataDTO metricDataDTO = metricDataMapper.toDto(updatedMetricData);
 
         restMetricDataMockMvc
@@ -212,7 +198,6 @@ class MetricDataResourceIT {
         assertThat(testMetricData.getTimeStamp()).isEqualTo(UPDATED_TIME_STAMP);
         assertThat(testMetricData.getMeasureValue()).isEqualTo(UPDATED_MEASURE_VALUE);
         assertThat(testMetricData.getName()).isEqualTo(UPDATED_NAME);
-        assertThat(testMetricData.getStatus()).isEqualTo(UPDATED_STATUS);
     }
 
     @Test
@@ -309,7 +294,6 @@ class MetricDataResourceIT {
         assertThat(testMetricData.getTimeStamp()).isEqualTo(UPDATED_TIME_STAMP);
         assertThat(testMetricData.getMeasureValue()).isEqualTo(UPDATED_MEASURE_VALUE);
         assertThat(testMetricData.getName()).isEqualTo(DEFAULT_NAME);
-        assertThat(testMetricData.getStatus()).isEqualTo(DEFAULT_STATUS);
     }
 
     @Test
@@ -324,11 +308,7 @@ class MetricDataResourceIT {
         MetricData partialUpdatedMetricData = new MetricData();
         partialUpdatedMetricData.setId(metricData.getId());
 
-        partialUpdatedMetricData
-            .timeStamp(UPDATED_TIME_STAMP)
-            .measureValue(UPDATED_MEASURE_VALUE)
-            .name(UPDATED_NAME)
-            .status(UPDATED_STATUS);
+        partialUpdatedMetricData.timeStamp(UPDATED_TIME_STAMP).measureValue(UPDATED_MEASURE_VALUE).name(UPDATED_NAME);
 
         restMetricDataMockMvc
             .perform(
@@ -345,7 +325,6 @@ class MetricDataResourceIT {
         assertThat(testMetricData.getTimeStamp()).isEqualTo(UPDATED_TIME_STAMP);
         assertThat(testMetricData.getMeasureValue()).isEqualTo(UPDATED_MEASURE_VALUE);
         assertThat(testMetricData.getName()).isEqualTo(UPDATED_NAME);
-        assertThat(testMetricData.getStatus()).isEqualTo(UPDATED_STATUS);
     }
 
     @Test

@@ -31,17 +31,20 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class ProductDataResourceIT {
 
-    private static final Long DEFAULT_COMPLETED_QTY = 1L;
-    private static final Long UPDATED_COMPLETED_QTY = 2L;
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
 
-    private static final Long DEFAULT_SCRAPED_QTY = 1L;
-    private static final Long UPDATED_SCRAPED_QTY = 2L;
+    private static final Integer DEFAULT_SCRAPED_QTY = 1;
+    private static final Integer UPDATED_SCRAPED_QTY = 2;
 
-    private static final Long DEFAULT_PENDING_QTY = 1L;
-    private static final Long UPDATED_PENDING_QTY = 2L;
+    private static final Integer DEFAULT_PENDING_QTY = 1;
+    private static final Integer UPDATED_PENDING_QTY = 2;
 
-    private static final Long DEFAULT_REJECTED_QTY = 1L;
-    private static final Long UPDATED_REJECTED_QTY = 2L;
+    private static final Integer DEFAULT_REJECTED_QTY = 1;
+    private static final Integer UPDATED_REJECTED_QTY = 2;
+
+    private static final Integer DEFAULT_COMPLETED_QTY = 1;
+    private static final Integer UPDATED_COMPLETED_QTY = 2;
 
     private static final String ENTITY_API_URL = "/api/product-data";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -71,10 +74,11 @@ class ProductDataResourceIT {
      */
     public static ProductData createEntity(EntityManager em) {
         ProductData productData = new ProductData()
-            .completedQty(DEFAULT_COMPLETED_QTY)
+            .name(DEFAULT_NAME)
             .scrapedQty(DEFAULT_SCRAPED_QTY)
             .pendingQty(DEFAULT_PENDING_QTY)
-            .rejectedQty(DEFAULT_REJECTED_QTY);
+            .rejectedQty(DEFAULT_REJECTED_QTY)
+            .completedQty(DEFAULT_COMPLETED_QTY);
         return productData;
     }
 
@@ -86,10 +90,11 @@ class ProductDataResourceIT {
      */
     public static ProductData createUpdatedEntity(EntityManager em) {
         ProductData productData = new ProductData()
-            .completedQty(UPDATED_COMPLETED_QTY)
+            .name(UPDATED_NAME)
             .scrapedQty(UPDATED_SCRAPED_QTY)
             .pendingQty(UPDATED_PENDING_QTY)
-            .rejectedQty(UPDATED_REJECTED_QTY);
+            .rejectedQty(UPDATED_REJECTED_QTY)
+            .completedQty(UPDATED_COMPLETED_QTY);
         return productData;
     }
 
@@ -114,10 +119,11 @@ class ProductDataResourceIT {
         List<ProductData> productDataList = productDataRepository.findAll();
         assertThat(productDataList).hasSize(databaseSizeBeforeCreate + 1);
         ProductData testProductData = productDataList.get(productDataList.size() - 1);
-        assertThat(testProductData.getCompletedQty()).isEqualTo(DEFAULT_COMPLETED_QTY);
+        assertThat(testProductData.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testProductData.getScrapedQty()).isEqualTo(DEFAULT_SCRAPED_QTY);
         assertThat(testProductData.getPendingQty()).isEqualTo(DEFAULT_PENDING_QTY);
         assertThat(testProductData.getRejectedQty()).isEqualTo(DEFAULT_REJECTED_QTY);
+        assertThat(testProductData.getCompletedQty()).isEqualTo(DEFAULT_COMPLETED_QTY);
     }
 
     @Test
@@ -153,10 +159,11 @@ class ProductDataResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(productData.getId().intValue())))
-            .andExpect(jsonPath("$.[*].completedQty").value(hasItem(DEFAULT_COMPLETED_QTY.intValue())))
-            .andExpect(jsonPath("$.[*].scrapedQty").value(hasItem(DEFAULT_SCRAPED_QTY.intValue())))
-            .andExpect(jsonPath("$.[*].pendingQty").value(hasItem(DEFAULT_PENDING_QTY.intValue())))
-            .andExpect(jsonPath("$.[*].rejectedQty").value(hasItem(DEFAULT_REJECTED_QTY.intValue())));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
+            .andExpect(jsonPath("$.[*].scrapedQty").value(hasItem(DEFAULT_SCRAPED_QTY)))
+            .andExpect(jsonPath("$.[*].pendingQty").value(hasItem(DEFAULT_PENDING_QTY)))
+            .andExpect(jsonPath("$.[*].rejectedQty").value(hasItem(DEFAULT_REJECTED_QTY)))
+            .andExpect(jsonPath("$.[*].completedQty").value(hasItem(DEFAULT_COMPLETED_QTY)));
     }
 
     @Test
@@ -171,10 +178,11 @@ class ProductDataResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(productData.getId().intValue()))
-            .andExpect(jsonPath("$.completedQty").value(DEFAULT_COMPLETED_QTY.intValue()))
-            .andExpect(jsonPath("$.scrapedQty").value(DEFAULT_SCRAPED_QTY.intValue()))
-            .andExpect(jsonPath("$.pendingQty").value(DEFAULT_PENDING_QTY.intValue()))
-            .andExpect(jsonPath("$.rejectedQty").value(DEFAULT_REJECTED_QTY.intValue()));
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
+            .andExpect(jsonPath("$.scrapedQty").value(DEFAULT_SCRAPED_QTY))
+            .andExpect(jsonPath("$.pendingQty").value(DEFAULT_PENDING_QTY))
+            .andExpect(jsonPath("$.rejectedQty").value(DEFAULT_REJECTED_QTY))
+            .andExpect(jsonPath("$.completedQty").value(DEFAULT_COMPLETED_QTY));
     }
 
     @Test
@@ -197,10 +205,11 @@ class ProductDataResourceIT {
         // Disconnect from session so that the updates on updatedProductData are not directly saved in db
         em.detach(updatedProductData);
         updatedProductData
-            .completedQty(UPDATED_COMPLETED_QTY)
+            .name(UPDATED_NAME)
             .scrapedQty(UPDATED_SCRAPED_QTY)
             .pendingQty(UPDATED_PENDING_QTY)
-            .rejectedQty(UPDATED_REJECTED_QTY);
+            .rejectedQty(UPDATED_REJECTED_QTY)
+            .completedQty(UPDATED_COMPLETED_QTY);
         ProductDataDTO productDataDTO = productDataMapper.toDto(updatedProductData);
 
         restProductDataMockMvc
@@ -215,10 +224,11 @@ class ProductDataResourceIT {
         List<ProductData> productDataList = productDataRepository.findAll();
         assertThat(productDataList).hasSize(databaseSizeBeforeUpdate);
         ProductData testProductData = productDataList.get(productDataList.size() - 1);
-        assertThat(testProductData.getCompletedQty()).isEqualTo(UPDATED_COMPLETED_QTY);
+        assertThat(testProductData.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testProductData.getScrapedQty()).isEqualTo(UPDATED_SCRAPED_QTY);
         assertThat(testProductData.getPendingQty()).isEqualTo(UPDATED_PENDING_QTY);
         assertThat(testProductData.getRejectedQty()).isEqualTo(UPDATED_REJECTED_QTY);
+        assertThat(testProductData.getCompletedQty()).isEqualTo(UPDATED_COMPLETED_QTY);
     }
 
     @Test
@@ -298,7 +308,7 @@ class ProductDataResourceIT {
         ProductData partialUpdatedProductData = new ProductData();
         partialUpdatedProductData.setId(productData.getId());
 
-        partialUpdatedProductData.completedQty(UPDATED_COMPLETED_QTY).pendingQty(UPDATED_PENDING_QTY);
+        partialUpdatedProductData.name(UPDATED_NAME).pendingQty(UPDATED_PENDING_QTY);
 
         restProductDataMockMvc
             .perform(
@@ -312,10 +322,11 @@ class ProductDataResourceIT {
         List<ProductData> productDataList = productDataRepository.findAll();
         assertThat(productDataList).hasSize(databaseSizeBeforeUpdate);
         ProductData testProductData = productDataList.get(productDataList.size() - 1);
-        assertThat(testProductData.getCompletedQty()).isEqualTo(UPDATED_COMPLETED_QTY);
+        assertThat(testProductData.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testProductData.getScrapedQty()).isEqualTo(DEFAULT_SCRAPED_QTY);
         assertThat(testProductData.getPendingQty()).isEqualTo(UPDATED_PENDING_QTY);
         assertThat(testProductData.getRejectedQty()).isEqualTo(DEFAULT_REJECTED_QTY);
+        assertThat(testProductData.getCompletedQty()).isEqualTo(DEFAULT_COMPLETED_QTY);
     }
 
     @Test
@@ -331,10 +342,11 @@ class ProductDataResourceIT {
         partialUpdatedProductData.setId(productData.getId());
 
         partialUpdatedProductData
-            .completedQty(UPDATED_COMPLETED_QTY)
+            .name(UPDATED_NAME)
             .scrapedQty(UPDATED_SCRAPED_QTY)
             .pendingQty(UPDATED_PENDING_QTY)
-            .rejectedQty(UPDATED_REJECTED_QTY);
+            .rejectedQty(UPDATED_REJECTED_QTY)
+            .completedQty(UPDATED_COMPLETED_QTY);
 
         restProductDataMockMvc
             .perform(
@@ -348,10 +360,11 @@ class ProductDataResourceIT {
         List<ProductData> productDataList = productDataRepository.findAll();
         assertThat(productDataList).hasSize(databaseSizeBeforeUpdate);
         ProductData testProductData = productDataList.get(productDataList.size() - 1);
-        assertThat(testProductData.getCompletedQty()).isEqualTo(UPDATED_COMPLETED_QTY);
+        assertThat(testProductData.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testProductData.getScrapedQty()).isEqualTo(UPDATED_SCRAPED_QTY);
         assertThat(testProductData.getPendingQty()).isEqualTo(UPDATED_PENDING_QTY);
         assertThat(testProductData.getRejectedQty()).isEqualTo(UPDATED_REJECTED_QTY);
+        assertThat(testProductData.getCompletedQty()).isEqualTo(UPDATED_COMPLETED_QTY);
     }
 
     @Test

@@ -31,6 +31,15 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class LocationDataResourceIT {
 
+    private static final String DEFAULT_FLOOR = "AAAAAAAAAA";
+    private static final String UPDATED_FLOOR = "BBBBBBBBBB";
+
+    private static final String DEFAULT_ROOM = "AAAAAAAAAA";
+    private static final String UPDATED_ROOM = "BBBBBBBBBB";
+
+    private static final String DEFAULT_ADDITIONAL_INFO = "AAAAAAAAAA";
+    private static final String UPDATED_ADDITIONAL_INFO = "BBBBBBBBBB";
+
     private static final String ENTITY_API_URL = "/api/location-data";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -58,7 +67,7 @@ class LocationDataResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static LocationData createEntity(EntityManager em) {
-        LocationData locationData = new LocationData();
+        LocationData locationData = new LocationData().floor(DEFAULT_FLOOR).room(DEFAULT_ROOM).additionalInfo(DEFAULT_ADDITIONAL_INFO);
         return locationData;
     }
 
@@ -69,7 +78,7 @@ class LocationDataResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static LocationData createUpdatedEntity(EntityManager em) {
-        LocationData locationData = new LocationData();
+        LocationData locationData = new LocationData().floor(UPDATED_FLOOR).room(UPDATED_ROOM).additionalInfo(UPDATED_ADDITIONAL_INFO);
         return locationData;
     }
 
@@ -94,6 +103,9 @@ class LocationDataResourceIT {
         List<LocationData> locationDataList = locationDataRepository.findAll();
         assertThat(locationDataList).hasSize(databaseSizeBeforeCreate + 1);
         LocationData testLocationData = locationDataList.get(locationDataList.size() - 1);
+        assertThat(testLocationData.getFloor()).isEqualTo(DEFAULT_FLOOR);
+        assertThat(testLocationData.getRoom()).isEqualTo(DEFAULT_ROOM);
+        assertThat(testLocationData.getAdditionalInfo()).isEqualTo(DEFAULT_ADDITIONAL_INFO);
     }
 
     @Test
@@ -128,7 +140,10 @@ class LocationDataResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(locationData.getId().intValue())));
+            .andExpect(jsonPath("$.[*].id").value(hasItem(locationData.getId().intValue())))
+            .andExpect(jsonPath("$.[*].floor").value(hasItem(DEFAULT_FLOOR)))
+            .andExpect(jsonPath("$.[*].room").value(hasItem(DEFAULT_ROOM)))
+            .andExpect(jsonPath("$.[*].additionalInfo").value(hasItem(DEFAULT_ADDITIONAL_INFO)));
     }
 
     @Test
@@ -142,7 +157,10 @@ class LocationDataResourceIT {
             .perform(get(ENTITY_API_URL_ID, locationData.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(locationData.getId().intValue()));
+            .andExpect(jsonPath("$.id").value(locationData.getId().intValue()))
+            .andExpect(jsonPath("$.floor").value(DEFAULT_FLOOR))
+            .andExpect(jsonPath("$.room").value(DEFAULT_ROOM))
+            .andExpect(jsonPath("$.additionalInfo").value(DEFAULT_ADDITIONAL_INFO));
     }
 
     @Test
@@ -164,6 +182,7 @@ class LocationDataResourceIT {
         LocationData updatedLocationData = locationDataRepository.findById(locationData.getId()).get();
         // Disconnect from session so that the updates on updatedLocationData are not directly saved in db
         em.detach(updatedLocationData);
+        updatedLocationData.floor(UPDATED_FLOOR).room(UPDATED_ROOM).additionalInfo(UPDATED_ADDITIONAL_INFO);
         LocationDataDTO locationDataDTO = locationDataMapper.toDto(updatedLocationData);
 
         restLocationDataMockMvc
@@ -178,6 +197,9 @@ class LocationDataResourceIT {
         List<LocationData> locationDataList = locationDataRepository.findAll();
         assertThat(locationDataList).hasSize(databaseSizeBeforeUpdate);
         LocationData testLocationData = locationDataList.get(locationDataList.size() - 1);
+        assertThat(testLocationData.getFloor()).isEqualTo(UPDATED_FLOOR);
+        assertThat(testLocationData.getRoom()).isEqualTo(UPDATED_ROOM);
+        assertThat(testLocationData.getAdditionalInfo()).isEqualTo(UPDATED_ADDITIONAL_INFO);
     }
 
     @Test
@@ -259,6 +281,8 @@ class LocationDataResourceIT {
         LocationData partialUpdatedLocationData = new LocationData();
         partialUpdatedLocationData.setId(locationData.getId());
 
+        partialUpdatedLocationData.floor(UPDATED_FLOOR).additionalInfo(UPDATED_ADDITIONAL_INFO);
+
         restLocationDataMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedLocationData.getId())
@@ -271,6 +295,9 @@ class LocationDataResourceIT {
         List<LocationData> locationDataList = locationDataRepository.findAll();
         assertThat(locationDataList).hasSize(databaseSizeBeforeUpdate);
         LocationData testLocationData = locationDataList.get(locationDataList.size() - 1);
+        assertThat(testLocationData.getFloor()).isEqualTo(UPDATED_FLOOR);
+        assertThat(testLocationData.getRoom()).isEqualTo(DEFAULT_ROOM);
+        assertThat(testLocationData.getAdditionalInfo()).isEqualTo(UPDATED_ADDITIONAL_INFO);
     }
 
     @Test
@@ -285,6 +312,8 @@ class LocationDataResourceIT {
         LocationData partialUpdatedLocationData = new LocationData();
         partialUpdatedLocationData.setId(locationData.getId());
 
+        partialUpdatedLocationData.floor(UPDATED_FLOOR).room(UPDATED_ROOM).additionalInfo(UPDATED_ADDITIONAL_INFO);
+
         restLocationDataMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedLocationData.getId())
@@ -297,6 +326,9 @@ class LocationDataResourceIT {
         List<LocationData> locationDataList = locationDataRepository.findAll();
         assertThat(locationDataList).hasSize(databaseSizeBeforeUpdate);
         LocationData testLocationData = locationDataList.get(locationDataList.size() - 1);
+        assertThat(testLocationData.getFloor()).isEqualTo(UPDATED_FLOOR);
+        assertThat(testLocationData.getRoom()).isEqualTo(UPDATED_ROOM);
+        assertThat(testLocationData.getAdditionalInfo()).isEqualTo(UPDATED_ADDITIONAL_INFO);
     }
 
     @Test

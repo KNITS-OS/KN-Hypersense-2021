@@ -24,6 +24,10 @@ public class CompanyUser implements Serializable {
     @Column(name = "users_uuid")
     private String usersUuid;
 
+    @OneToOne
+    @JoinColumn(unique = true)
+    private UserProfile userProfile;
+
     @ManyToOne
     @JsonIgnoreProperties(value = { "users", "factory" }, allowSetters = true)
     private BusinessUnit businessUnit;
@@ -53,6 +57,19 @@ public class CompanyUser implements Serializable {
 
     public void setUsersUuid(String usersUuid) {
         this.usersUuid = usersUuid;
+    }
+
+    public UserProfile getUserProfile() {
+        return this.userProfile;
+    }
+
+    public CompanyUser userProfile(UserProfile userProfile) {
+        this.setUserProfile(userProfile);
+        return this;
+    }
+
+    public void setUserProfile(UserProfile userProfile) {
+        this.userProfile = userProfile;
     }
 
     public BusinessUnit getBusinessUnit() {

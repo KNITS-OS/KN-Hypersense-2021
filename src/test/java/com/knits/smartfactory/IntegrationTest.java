@@ -1,6 +1,6 @@
 package com.knits.smartfactory;
 
-import com.knits.smartfactory.SmartFactoryApp;
+import com.knits.smartfactory.SmartfactoryApp;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -12,6 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@SpringBootTest(classes = SmartFactoryApp.class)
+@SpringBootTest(classes = SmartfactoryApp.class)
 public @interface IntegrationTest {
 }

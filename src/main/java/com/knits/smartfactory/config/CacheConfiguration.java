@@ -59,15 +59,17 @@ public class CacheConfiguration {
             createCache(cm, com.knits.smartfactory.domain.ProductionLineGroup.class.getName());
             createCache(cm, com.knits.smartfactory.domain.ProductionLineGroup.class.getName() + ".productionLines");
             createCache(cm, com.knits.smartfactory.domain.Metric.class.getName());
-            createCache(cm, com.knits.smartfactory.domain.Metric.class.getName() + ".metricData");
+            createCache(cm, com.knits.smartfactory.domain.Metric.class.getName() + ".metrics");
             createCache(cm, com.knits.smartfactory.domain.MetricData.class.getName());
             createCache(cm, com.knits.smartfactory.domain.CompanyUser.class.getName());
+            createCache(cm, com.knits.smartfactory.domain.UserProfile.class.getName());
             createCache(cm, com.knits.smartfactory.domain.LocationData.class.getName());
             createCache(cm, com.knits.smartfactory.domain.Things.class.getName());
             createCache(cm, com.knits.smartfactory.domain.State.class.getName());
+            createCache(cm, com.knits.smartfactory.domain.Status.class.getName());
             createCache(cm, com.knits.smartfactory.domain.ProductData.class.getName());
-            createCache(cm, com.knits.smartfactory.domain.ProductPlan.class.getName());
-            createCache(cm, com.knits.smartfactory.domain.ProductPlan.class.getName() + ".productData");
+            createCache(cm, com.knits.smartfactory.domain.ProductionPlan.class.getName());
+            createCache(cm, com.knits.smartfactory.domain.ProductionPlan.class.getName() + ".productData");
             // jhipster-needle-ehcache-add-entry
         };
     }

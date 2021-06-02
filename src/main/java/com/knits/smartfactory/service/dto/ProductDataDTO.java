@@ -12,15 +12,17 @@ public class ProductDataDTO implements Serializable {
 
     private Long id;
 
-    private Long completedQty;
+    private String name;
 
-    private Long scrapedQty;
+    private Integer scrapedQty;
 
-    private Long pendingQty;
+    private Integer pendingQty;
 
-    private Long rejectedQty;
+    private Integer rejectedQty;
 
-    private ProductPlanDTO productPlan;
+    private Integer completedQty;
+
+    private ProductionPlanDTO productionPlan;
 
     public Long getId() {
         return id;
@@ -30,44 +32,52 @@ public class ProductDataDTO implements Serializable {
         this.id = id;
     }
 
-    public Long getCompletedQty() {
-        return completedQty;
+    public String getName() {
+        return name;
     }
 
-    public void setCompletedQty(Long completedQty) {
-        this.completedQty = completedQty;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Long getScrapedQty() {
+    public Integer getScrapedQty() {
         return scrapedQty;
     }
 
-    public void setScrapedQty(Long scrapedQty) {
+    public void setScrapedQty(Integer scrapedQty) {
         this.scrapedQty = scrapedQty;
     }
 
-    public Long getPendingQty() {
+    public Integer getPendingQty() {
         return pendingQty;
     }
 
-    public void setPendingQty(Long pendingQty) {
+    public void setPendingQty(Integer pendingQty) {
         this.pendingQty = pendingQty;
     }
 
-    public Long getRejectedQty() {
+    public Integer getRejectedQty() {
         return rejectedQty;
     }
 
-    public void setRejectedQty(Long rejectedQty) {
+    public void setRejectedQty(Integer rejectedQty) {
         this.rejectedQty = rejectedQty;
     }
 
-    public ProductPlanDTO getProductPlan() {
-        return productPlan;
+    public Integer getCompletedQty() {
+        return completedQty;
     }
 
-    public void setProductPlan(ProductPlanDTO productPlan) {
-        this.productPlan = productPlan;
+    public void setCompletedQty(Integer completedQty) {
+        this.completedQty = completedQty;
+    }
+
+    public ProductionPlanDTO getProductionPlan() {
+        return productionPlan;
+    }
+
+    public void setProductionPlan(ProductionPlanDTO productionPlan) {
+        this.productionPlan = productionPlan;
     }
 
     @Override
@@ -96,11 +106,12 @@ public class ProductDataDTO implements Serializable {
     public String toString() {
         return "ProductDataDTO{" +
             "id=" + getId() +
-            ", completedQty=" + getCompletedQty() +
+            ", name='" + getName() + "'" +
             ", scrapedQty=" + getScrapedQty() +
             ", pendingQty=" + getPendingQty() +
             ", rejectedQty=" + getRejectedQty() +
-            ", productPlan=" + getProductPlan() +
+            ", completedQty=" + getCompletedQty() +
+            ", productionPlan=" + getProductionPlan() +
             "}";
     }
 }

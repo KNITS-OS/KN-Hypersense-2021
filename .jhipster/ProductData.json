@@ -2,28 +2,32 @@
   "name": "ProductData",
   "fields": [
     {
-      "fieldName": "completedQty",
-      "fieldType": "Long"
+      "fieldName": "name",
+      "fieldType": "String"
     },
     {
       "fieldName": "scrapedQty",
-      "fieldType": "Long"
+      "fieldType": "Integer"
     },
     {
       "fieldName": "pendingQty",
-      "fieldType": "Long"
+      "fieldType": "Integer"
     },
     {
       "fieldName": "rejectedQty",
-      "fieldType": "Long"
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "completedQty",
+      "fieldType": "Integer"
     }
   ],
   "relationships": [
     {
       "relationshipType": "many-to-one",
-      "otherEntityName": "productPlan",
+      "otherEntityName": "productionPlan",
       "otherEntityRelationshipName": "productData",
-      "relationshipName": "productPlan"
+      "relationshipName": "productionPlan"
     }
   ],
   "javadoc": "Entity of the product that being produced.\\n@author Vassili Moskaljov.\\n@version 1.0",
@@ -36,5 +40,5 @@
   "readOnly": false,
   "embedded": false,
   "applications": "*",
-  "changelogDate": "20210524174421"
+  "changelogDate": "20210602183722"
 }

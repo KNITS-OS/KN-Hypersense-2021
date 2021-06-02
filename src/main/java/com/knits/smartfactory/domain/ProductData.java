@@ -21,21 +21,24 @@ public class ProductData implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "completed_qty")
-    private Long completedQty;
+    @Column(name = "name")
+    private String name;
 
     @Column(name = "scraped_qty")
-    private Long scrapedQty;
+    private Integer scrapedQty;
 
     @Column(name = "pending_qty")
-    private Long pendingQty;
+    private Integer pendingQty;
 
     @Column(name = "rejected_qty")
-    private Long rejectedQty;
+    private Integer rejectedQty;
+
+    @Column(name = "completed_qty")
+    private Integer completedQty;
 
     @ManyToOne
     @JsonIgnoreProperties(value = { "productData" }, allowSetters = true)
-    private ProductPlan productPlan;
+    private ProductionPlan productionPlan;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -51,69 +54,82 @@ public class ProductData implements Serializable {
         return this;
     }
 
-    public Long getCompletedQty() {
-        return this.completedQty;
+    public String getName() {
+        return this.name;
     }
 
-    public ProductData completedQty(Long completedQty) {
-        this.completedQty = completedQty;
+    public ProductData name(String name) {
+        this.name = name;
         return this;
     }
 
-    public void setCompletedQty(Long completedQty) {
-        this.completedQty = completedQty;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Long getScrapedQty() {
+    public Integer getScrapedQty() {
         return this.scrapedQty;
     }
 
-    public ProductData scrapedQty(Long scrapedQty) {
+    public ProductData scrapedQty(Integer scrapedQty) {
         this.scrapedQty = scrapedQty;
         return this;
     }
 
-    public void setScrapedQty(Long scrapedQty) {
+    public void setScrapedQty(Integer scrapedQty) {
         this.scrapedQty = scrapedQty;
     }
 
-    public Long getPendingQty() {
+    public Integer getPendingQty() {
         return this.pendingQty;
     }
 
-    public ProductData pendingQty(Long pendingQty) {
+    public ProductData pendingQty(Integer pendingQty) {
         this.pendingQty = pendingQty;
         return this;
     }
 
-    public void setPendingQty(Long pendingQty) {
+    public void setPendingQty(Integer pendingQty) {
         this.pendingQty = pendingQty;
     }
 
-    public Long getRejectedQty() {
+    public Integer getRejectedQty() {
         return this.rejectedQty;
     }
 
-    public ProductData rejectedQty(Long rejectedQty) {
+    public ProductData rejectedQty(Integer rejectedQty) {
         this.rejectedQty = rejectedQty;
         return this;
     }
 
-    public void setRejectedQty(Long rejectedQty) {
+    public void setRejectedQty(Integer rejectedQty) {
         this.rejectedQty = rejectedQty;
     }
 
-    public ProductPlan getProductPlan() {
-        return this.productPlan;
+    public Integer getCompletedQty() {
+        return this.completedQty;
     }
 
-    public ProductData productPlan(ProductPlan productPlan) {
-        this.setProductPlan(productPlan);
+    public ProductData completedQty(Integer completedQty) {
+        this.completedQty = completedQty;
         return this;
     }
 
-    public void setProductPlan(ProductPlan productPlan) {
-        this.productPlan = productPlan;
+    public void setCompletedQty(Integer completedQty) {
+        this.completedQty = completedQty;
+    }
+
+    public ProductionPlan getProductionPlan() {
+        return this.productionPlan;
+    }
+
+    public ProductData productionPlan(ProductionPlan productionPlan) {
+        this.setProductionPlan(productionPlan);
+        return this;
+    }
+
+    public void setProductionPlan(ProductionPlan productionPlan) {
+        this.productionPlan = productionPlan;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
@@ -140,10 +156,11 @@ public class ProductData implements Serializable {
     public String toString() {
         return "ProductData{" +
             "id=" + getId() +
-            ", completedQty=" + getCompletedQty() +
+            ", name='" + getName() + "'" +
             ", scrapedQty=" + getScrapedQty() +
             ", pendingQty=" + getPendingQty() +
             ", rejectedQty=" + getRejectedQty() +
+            ", completedQty=" + getCompletedQty() +
             "}";
     }
 }

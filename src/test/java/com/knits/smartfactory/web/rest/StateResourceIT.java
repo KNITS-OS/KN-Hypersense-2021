@@ -31,6 +31,12 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class StateResourceIT {
 
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
+
+    private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
+    private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
+
     private static final String ENTITY_API_URL = "/api/states";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -58,7 +64,7 @@ class StateResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static State createEntity(EntityManager em) {
-        State state = new State();
+        State state = new State().name(DEFAULT_NAME).description(DEFAULT_DESCRIPTION);
         return state;
     }
 
@@ -69,7 +75,7 @@ class StateResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static State createUpdatedEntity(EntityManager em) {
-        State state = new State();
+        State state = new State().name(UPDATED_NAME).description(UPDATED_DESCRIPTION);
         return state;
     }
 
@@ -92,6 +98,8 @@ class StateResourceIT {
         List<State> stateList = stateRepository.findAll();
         assertThat(stateList).hasSize(databaseSizeBeforeCreate + 1);
         State testState = stateList.get(stateList.size() - 1);
+        assertThat(testState.getName()).isEqualTo(DEFAULT_NAME);
+        assertThat(testState.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
     }
 
     @Test
@@ -124,7 +132,9 @@ class StateResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(state.getId().intValue())));
+            .andExpect(jsonPath("$.[*].id").value(hasItem(state.getId().intValue())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)));
     }
 
     @Test
@@ -138,7 +148,9 @@ class StateResourceIT {
             .perform(get(ENTITY_API_URL_ID, state.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(state.getId().intValue()));
+            .andExpect(jsonPath("$.id").value(state.getId().intValue()))
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
+            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION));
     }
 
     @Test
@@ -160,6 +172,7 @@ class StateResourceIT {
         State updatedState = stateRepository.findById(state.getId()).get();
         // Disconnect from session so that the updates on updatedState are not directly saved in db
         em.detach(updatedState);
+        updatedState.name(UPDATED_NAME).description(UPDATED_DESCRIPTION);
         StateDTO stateDTO = stateMapper.toDto(updatedState);
 
         restStateMockMvc
@@ -174,6 +187,8 @@ class StateResourceIT {
         List<State> stateList = stateRepository.findAll();
         assertThat(stateList).hasSize(databaseSizeBeforeUpdate);
         State testState = stateList.get(stateList.size() - 1);
+        assertThat(testState.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testState.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
     }
 
     @Test
@@ -265,6 +280,8 @@ class StateResourceIT {
         List<State> stateList = stateRepository.findAll();
         assertThat(stateList).hasSize(databaseSizeBeforeUpdate);
         State testState = stateList.get(stateList.size() - 1);
+        assertThat(testState.getName()).isEqualTo(DEFAULT_NAME);
+        assertThat(testState.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
     }
 
     @Test
@@ -279,6 +296,8 @@ class StateResourceIT {
         State partialUpdatedState = new State();
         partialUpdatedState.setId(state.getId());
 
+        partialUpdatedState.name(UPDATED_NAME).description(UPDATED_DESCRIPTION);
+
         restStateMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedState.getId())
@@ -291,6 +310,8 @@ class StateResourceIT {
         List<State> stateList = stateRepository.findAll();
         assertThat(stateList).hasSize(databaseSizeBeforeUpdate);
         State testState = stateList.get(stateList.size() - 1);
+        assertThat(testState.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testState.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
     }
 
     @Test

@@ -20,6 +20,15 @@ public class LocationData implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
+    @Column(name = "floor")
+    private String floor;
+
+    @Column(name = "room")
+    private String room;
+
+    @Column(name = "additional_info")
+    private String additionalInfo;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
@@ -32,6 +41,45 @@ public class LocationData implements Serializable {
     public LocationData id(Long id) {
         this.id = id;
         return this;
+    }
+
+    public String getFloor() {
+        return this.floor;
+    }
+
+    public LocationData floor(String floor) {
+        this.floor = floor;
+        return this;
+    }
+
+    public void setFloor(String floor) {
+        this.floor = floor;
+    }
+
+    public String getRoom() {
+        return this.room;
+    }
+
+    public LocationData room(String room) {
+        this.room = room;
+        return this;
+    }
+
+    public void setRoom(String room) {
+        this.room = room;
+    }
+
+    public String getAdditionalInfo() {
+        return this.additionalInfo;
+    }
+
+    public LocationData additionalInfo(String additionalInfo) {
+        this.additionalInfo = additionalInfo;
+        return this;
+    }
+
+    public void setAdditionalInfo(String additionalInfo) {
+        this.additionalInfo = additionalInfo;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
@@ -58,6 +106,9 @@ public class LocationData implements Serializable {
     public String toString() {
         return "LocationData{" +
             "id=" + getId() +
+            ", floor='" + getFloor() + "'" +
+            ", room='" + getRoom() + "'" +
+            ", additionalInfo='" + getAdditionalInfo() + "'" +
             "}";
     }
 }

@@ -28,8 +28,8 @@ public class Metric implements Serializable {
 
     @OneToMany(mappedBy = "metric")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "metric" }, allowSetters = true)
-    private Set<MetricData> metricData = new HashSet<>();
+    @JsonIgnoreProperties(value = { "status", "metric" }, allowSetters = true)
+    private Set<MetricData> metrics = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -58,35 +58,35 @@ public class Metric implements Serializable {
         this.thingUuid = thingUuid;
     }
 
-    public Set<MetricData> getMetricData() {
-        return this.metricData;
+    public Set<MetricData> getMetrics() {
+        return this.metrics;
     }
 
-    public Metric metricData(Set<MetricData> metricData) {
-        this.setMetricData(metricData);
+    public Metric metrics(Set<MetricData> metricData) {
+        this.setMetrics(metricData);
         return this;
     }
 
-    public Metric addMetricData(MetricData metricData) {
-        this.metricData.add(metricData);
+    public Metric addMetrics(MetricData metricData) {
+        this.metrics.add(metricData);
         metricData.setMetric(this);
         return this;
     }
 
-    public Metric removeMetricData(MetricData metricData) {
-        this.metricData.remove(metricData);
+    public Metric removeMetrics(MetricData metricData) {
+        this.metrics.remove(metricData);
         metricData.setMetric(null);
         return this;
     }
 
-    public void setMetricData(Set<MetricData> metricData) {
-        if (this.metricData != null) {
-            this.metricData.forEach(i -> i.setMetric(null));
+    public void setMetrics(Set<MetricData> metricData) {
+        if (this.metrics != null) {
+            this.metrics.forEach(i -> i.setMetric(null));
         }
         if (metricData != null) {
             metricData.forEach(i -> i.setMetric(this));
         }
-        this.metricData = metricData;
+        this.metrics = metricData;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

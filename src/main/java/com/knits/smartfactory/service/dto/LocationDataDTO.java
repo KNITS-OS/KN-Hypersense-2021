@@ -12,12 +12,42 @@ public class LocationDataDTO implements Serializable {
 
     private Long id;
 
+    private String floor;
+
+    private String room;
+
+    private String additionalInfo;
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getFloor() {
+        return floor;
+    }
+
+    public void setFloor(String floor) {
+        this.floor = floor;
+    }
+
+    public String getRoom() {
+        return room;
+    }
+
+    public void setRoom(String room) {
+        this.room = room;
+    }
+
+    public String getAdditionalInfo() {
+        return additionalInfo;
+    }
+
+    public void setAdditionalInfo(String additionalInfo) {
+        this.additionalInfo = additionalInfo;
     }
 
     @Override
@@ -46,6 +76,9 @@ public class LocationDataDTO implements Serializable {
     public String toString() {
         return "LocationDataDTO{" +
             "id=" + getId() +
+            ", floor='" + getFloor() + "'" +
+            ", room='" + getRoom() + "'" +
+            ", additionalInfo='" + getAdditionalInfo() + "'" +
             "}";
     }
 }

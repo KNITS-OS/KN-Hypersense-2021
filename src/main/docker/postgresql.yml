@@ -4,9 +4,9 @@ services:
   smartfactory-postgresql:
     image: postgres:13.2
     # volumes:
-    #   - ~/volumes/jhipster/SmartFactory/postgresql/:/var/lib/postgresql/data/
+    #   - ~/volumes/jhipster/smartfactory/postgresql/:/var/lib/postgresql/data/
     environment:
-      - POSTGRES_USER=SmartFactory
+      - POSTGRES_USER=smartfactory
       - POSTGRES_PASSWORD=
       - POSTGRES_HOST_AUTH_METHOD=trust
     # If you want to expose these ports outside your dev PC,

@@ -18,7 +18,7 @@ spring:
     # Uncomment the following line to enable tests against production database type rather than H2, using Testcontainers
     #active: testcontainers
   application:
-    name: SmartFactory
+    name: smartfactory
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:h2:mem:smartfactory;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
@@ -57,13 +57,13 @@ spring:
     basename: i18n/messages
   task:
     execution:
-      thread-name-prefix: smart-factory-task-
+      thread-name-prefix: smartfactory-task-
       pool:
         core-size: 1
         max-size: 50
         queue-capacity: 10000
     scheduling:
-      thread-name-prefix: smart-factory-scheduling-
+      thread-name-prefix: smartfactory-scheduling-
       pool:
         size: 1
   thymeleaf:
@@ -81,7 +81,7 @@ server:
 
 jhipster:
   clientApp:
-    name: 'smartFactoryApp'
+    name: 'smartfactoryApp'
   logging:
     # To test json console appender
     use-json-format: false
@@ -97,7 +97,7 @@ jhipster:
     authentication:
       jwt:
         # This token must be encoded using Base64 (you can type `echo 'secret-key'|base64` on your command line)
-        base64-secret: YTIyODI1N2RlMTNlY2RiMjk1Y2JhMGRkZGMyMjA4NjgxNTVmNzBlOTYwYWJlMTU0NDk1ZmU1ZmNkYTc0NzdmYWUzMDEwMDBjNmY0MzRjNjc0NTI1NWYzZDM0NzEzMjVkOTYwNGE5ZWNjOTQwNzkxMjBkNGI5NmZjNWMyZmI3MzU=
+        base64-secret: Njc2YTQ2OTkzYzg5OTFhMDU3NzE0M2NlZjBjNjZjYmM1OWMxZmQ1NmQ0NDk4ODk2ZjdmYjEwNjNmNDc1MWVmMjk5OWRhZjA2YmMwMjI0ZDllY2VlMzNhZTU4NGUzNmIyNzRkZDgxM2ZjYzU5MWI1YzMyOGJhZTA0OWY1ODcyNzM=
         # Token is valid 24 hours
         token-validity-in-seconds: 86400
 # ===================================================================

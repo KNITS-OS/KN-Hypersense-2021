@@ -1,6 +1,19 @@
 {
   "name": "LocationData",
-  "fields": [],
+  "fields": [
+    {
+      "fieldName": "floor",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "room",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "additionalInfo",
+      "fieldType": "String"
+    }
+  ],
   "relationships": [],
   "javadoc": "Entity that hold location specific to Production line.\\n@author Vassili Moskaljov.\\n@version 1.0",
   "entityTableName": "location_data",
@@ -12,5 +25,5 @@
   "readOnly": false,
   "embedded": false,
   "applications": "*",
-  "changelogDate": "20210524174418"
+  "changelogDate": "20210602183718"
 }

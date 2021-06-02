@@ -1,0 +1,25 @@
+{
+  "name": "Status",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [],
+  "javadoc": "Entity to define status for Metric Data\\n@author Vassili Moskaljov.\\n@version 1.0",
+  "entityTableName": "status",
+  "dto": "mapstruct",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210602183721"
+}

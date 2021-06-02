@@ -21,6 +21,12 @@ public class State implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "description")
+    private String description;
+
     @ManyToOne
     @JsonIgnoreProperties(value = { "locationData", "things", "states", "productionLineGroup" }, allowSetters = true)
     private ProductionLine productionLine;
@@ -37,6 +43,32 @@ public class State implements Serializable {
     public State id(Long id) {
         this.id = id;
         return this;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public State name(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public State description(String description) {
+        this.description = description;
+        return this;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public ProductionLine getProductionLine() {
@@ -76,6 +108,8 @@ public class State implements Serializable {
     public String toString() {
         return "State{" +
             "id=" + getId() +
+            ", name='" + getName() + "'" +
+            ", description='" + getDescription() + "'" +
             "}";
     }
 }

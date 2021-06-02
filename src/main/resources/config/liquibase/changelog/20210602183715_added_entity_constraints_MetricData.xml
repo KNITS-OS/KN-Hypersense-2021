@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity MetricData.
+    -->
+    <changeSet id="20210602183715-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="status_id"
+                                 baseTableName="metric_data"
+                                 constraintName="fk_metric_data__status_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="status"/>
+
+        <addForeignKeyConstraint baseColumnNames="metric_id"
+                                 baseTableName="metric_data"
+                                 constraintName="fk_metric_data__metric_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="metric"/>
+    </changeSet>
+</databaseChangeLog>

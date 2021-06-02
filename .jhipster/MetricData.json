@@ -3,7 +3,7 @@
   "fields": [
     {
       "fieldName": "timeStamp",
-      "fieldType": "LocalDate"
+      "fieldType": "Instant"
     },
     {
       "fieldName": "measureValue",
@@ -12,17 +12,20 @@
     {
       "fieldName": "name",
       "fieldType": "String"
-    },
-    {
-      "fieldName": "status",
-      "fieldType": "String"
     }
   ],
   "relationships": [
     {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "status",
+      "otherEntityRelationshipName": "metricData",
+      "relationshipName": "status",
+      "ownerSide": true
+    },
+    {
       "relationshipType": "many-to-one",
       "otherEntityName": "metric",
-      "otherEntityRelationshipName": "metricData",
+      "otherEntityRelationshipName": "metrics",
       "relationshipName": "metric"
     }
   ],
@@ -36,5 +39,5 @@
   "readOnly": false,
   "embedded": false,
   "applications": "*",
-  "changelogDate": "20210524174416"
+  "changelogDate": "20210602183715"
 }
