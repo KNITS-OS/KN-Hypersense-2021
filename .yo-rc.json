@@ -58,6 +58,9 @@
       "ProductData",
       "ProductionPlan"
     ],
-    "lastLiquibaseTimestamp": 1622659043000
+    "lastLiquibaseTimestamp": 1622659043000,
+    "herokuAppName": "smartfactoryapp",
+    "herokuDeployType": "git",
+    "herokuJavaVersion": "11"
   }
 }
