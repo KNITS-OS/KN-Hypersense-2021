@@ -43,33 +43,32 @@ public class UserJWTController {
             loginVM.getPassword()
         );
 
-        String request = new String(
-            new StringBuilder()
-                .append("{\n" + "  \"password\": \"")
-                .append(loginVM.getPassword())
-                .append("\",\n" + "  \"rememberMe\": true,\n" + "  \"username\": \"")
-                .append(loginVM.getUsername())
-                .append("\"" + "\n}")
-        );
-
-        Client client = ClientBuilder.newBuilder().build();
-        WebTarget target = client.target("https://coreplatform.herokuapp.com:443/api/authenticate");
-
-        Response response = target.request().post(Entity.entity(request, "application/json"));
-
-        JSONObject jsonObject = new JSONObject(response);
-
-        System.out.println("Response JSON");
-        System.out.println(jsonObject.toString());
+        //        String request = new String(
+        //            new StringBuilder()
+        //                .append("{\n" + "  \"password\": \"")
+        //                .append(loginVM.getPassword())
+        //                .append("\",\n" + "  \"rememberMe\": true,\n" + "  \"username\": \"")
+        //                .append(loginVM.getUsername())
+        //                .append("\"" + "\n}")
+        //        );
         //
-        //            response.close();  // You should close connections!
+        //        Client client = ClientBuilder.newBuilder().build();
+        //        WebTarget target = client.target("https://coreplatform.herokuapp.com:443/api/authenticate");
+        //
+        //        Response response = target.request().post(Entity.entity(request, "application/json"));
+        //
+        //        JSONObject jsonObject = new JSONObject(response);
+        //        String s = jsonObject.getJSONObject("metadata").getJSONArray("Authorization").getString(0);
+        //        s = s.substring(7);
+        //        System.err.println(s);
 
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt = tokenProvider.createToken(authentication, loginVM.isRememberMe());
+        String s = tokenProvider.createToken(authentication, loginVM.isRememberMe());
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add(JWTFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
-        return new ResponseEntity<>(new JWTToken(jwt), httpHeaders, HttpStatus.OK);
+        httpHeaders.add(JWTFilter.AUTHORIZATION_HEADER, "Bearer " + s);
+        //        return new ResponseEntity<>(new JWTToken(s), httpHeaders, HttpStatus.OK);
+        return new ResponseEntity<>(new JWTToken(s), httpHeaders, HttpStatus.OK);
     }
 
     /**
