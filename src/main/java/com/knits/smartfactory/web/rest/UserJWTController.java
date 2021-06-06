@@ -5,6 +5,12 @@ import com.knits.smartfactory.security.jwt.JWTFilter;
 import com.knits.smartfactory.security.jwt.TokenProvider;
 import com.knits.smartfactory.web.rest.vm.LoginVM;
 import javax.validation.Valid;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.Response;
+import org.json.JSONObject;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,6 +42,27 @@ public class UserJWTController {
             loginVM.getUsername(),
             loginVM.getPassword()
         );
+
+        String request = new String(
+            new StringBuilder()
+                .append("{\n" + "  \"password\": \"")
+                .append(loginVM.getPassword())
+                .append("\",\n" + "  \"rememberMe\": true,\n" + "  \"username\": \"")
+                .append(loginVM.getUsername())
+                .append("\"" + "\n}")
+        );
+
+        Client client = ClientBuilder.newBuilder().build();
+        WebTarget target = client.target("https://coreplatform.herokuapp.com:443/api/authenticate");
+
+        Response response = target.request().post(Entity.entity(request, "application/json"));
+
+        JSONObject jsonObject = new JSONObject(response);
+
+        System.out.println("Response JSON");
+        System.out.println(jsonObject.toString());
+        //
+        //            response.close();  // You should close connections!
 
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
