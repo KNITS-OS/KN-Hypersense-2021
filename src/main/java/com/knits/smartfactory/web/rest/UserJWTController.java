@@ -53,8 +53,8 @@ public class UserJWTController {
         );
 
         Client client = ClientBuilder.newBuilder().build();
-        //                WebTarget target = client.target("https://coreplatform.herokuapp.com:443/api/authenticate-application");
-        WebTarget target = client.target("http://localhost:9000/api/authenticate-application");
+        WebTarget target = client.target("https://dmknitscore.herokuapp.com:443/api/authenticate-application");
+        //        WebTarget target = client.target("http://localhost:9000/api/authenticate-application");
 
         Response response = target.request().post(Entity.entity(request, "application/json"));
 
