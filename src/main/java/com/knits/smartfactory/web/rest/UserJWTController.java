@@ -18,7 +18,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Controller to authenticate users.
@@ -58,18 +61,26 @@ public class UserJWTController {
         Response response = target.request().post(Entity.entity(request, "application/json"));
 
         JSONObject jsonObject = new JSONObject(response);
+        String jwtSting = jsonObject.getJSONObject("metadata").getJSONArray("Authorization").getString(0);
+        System.err.println(jwtSting);
+        String ks = jwtSting.substring(7);
+        System.err.println(ks);
 
-        System.out.println("Response JSON");
-        System.out.println(jsonObject.toString());
+        //        System.out.println("Response JSON");
+        //        System.out.println(jsonObject.toString());
         //
-        //            response.close();  // You should close connections!
+        response.close(); // You should close connections!
 
-        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt = tokenProvider.createToken(authentication, loginVM.isRememberMe());
+        //        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
+
+        //        SecurityContextHolder.getContext().setAuthentication(authentication);
+        //        String jwt = tokenProvider.createToken(authentication, loginVM.isRememberMe());
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add(JWTFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
-        return new ResponseEntity<>(new JWTToken(jwt), httpHeaders, HttpStatus.OK);
+        //        httpHeaders.add(JWTFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
+        httpHeaders.add(JWTFilter.AUTHORIZATION_HEADER, "Bearer " + ks);
+        //        new ResponseEntity<>(response,http);
+        //        return new ResponseEntity<>(new JWTToken(jwt), httpHeaders, HttpStatus.OK);
+        return new ResponseEntity<>(new JWTToken(ks), httpHeaders, HttpStatus.OK);
     }
 
     /**
