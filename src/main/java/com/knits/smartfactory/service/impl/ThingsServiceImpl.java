@@ -9,10 +9,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -64,14 +60,6 @@ public class ThingsServiceImpl implements ThingsService {
     @Transactional(readOnly = true)
     public List<ThingsDTO> findAll() {
         log.debug("Request to get all Things");
-        {
-            Client client = ClientBuilder.newBuilder().build();
-            WebTarget target = client.target("https://coreplatform.herokuapp.com:443/api/things");
-            Response response = target.request().get();
-            String value = response.readEntity(String.class);
-            response.close(); // You should close connections!
-        }
-
         return thingsRepository.findAll().stream().map(thingsMapper::toDto).collect(Collectors.toCollection(LinkedList::new));
     }
 
