@@ -16,8 +16,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -62,21 +60,9 @@ public class UserJWTController {
         System.err.println(jwtSting);
         String ks = jwtSting.substring(7);
         System.err.println(ks);
-
-        //        System.out.println("Response JSON");
-        //        System.out.println(jsonObject.toString());
-        //
-        response.close(); // You should close connections!
-
-        //        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
-
-        //        SecurityContextHolder.getContext().setAuthentication(authentication);
-        //        String jwt = tokenProvider.createToken(authentication, loginVM.isRememberMe());
+        response.close();
         HttpHeaders httpHeaders = new HttpHeaders();
-        //        httpHeaders.add(JWTFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
         httpHeaders.add(JWTFilter.AUTHORIZATION_HEADER, "Bearer " + ks);
-        //        new ResponseEntity<>(response,http);
-        //        return new ResponseEntity<>(new JWTToken(jwt), httpHeaders, HttpStatus.OK);
         return new ResponseEntity<>(new JWTToken(ks), httpHeaders, HttpStatus.OK);
     }
 
