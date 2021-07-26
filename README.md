@@ -5,6 +5,9 @@ This application was generated using JHipster 7.0.1, you can find documentation 
 ##Release Notes
 Can be found in [RELEASE_NOTES](RELEASE_NOTES.md).
 
+##JDL Scheme
+Last version can be found in [JDL](smart_factoryV4.jdl).
+
 ## Development
 
 Before you can build this project, you must install and configure the following dependencies on your machine:
